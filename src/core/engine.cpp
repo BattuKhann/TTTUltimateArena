@@ -8,6 +8,6 @@ Result move(BoardState &state, int square){
         state.p2 |= targetMask;
     }
 
-    state.unoccupied &= ~targetMask;
+    //state.unoccupied &= ~targetMask;
     return Result {(uint8_t)(square % 9), true};
 }
