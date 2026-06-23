@@ -1,5 +1,5 @@
-#define pO 0
-#define pX 1
+#define pX 0
+#define pO 1
 
 // Win Conditions
 #define R1 0b0000000000000111
