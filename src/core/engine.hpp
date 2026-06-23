@@ -1,6 +1,6 @@
 #include "types.hpp"
 
-inline unsigned __int128 getOccupied(const BoardState &state);
+inline __uint128_t getOccupied(const BoardState &state);
 
 inline uint16_t getGlobalBoard(const BoardState &state, int player);
 
@@ -16,6 +16,6 @@ inline bool checkWin(uint16_t board);
 
 inline bool checkFull(uint16_t board);
 
-inline unsigned __int128 getLegalMoves(const BoardState &state);
+inline __uint128_t getLegalMoves(const BoardState &state);
 
 bool move(BoardState &state, int square); //Sets currboard to 0xFF for open play, returns true if game is won

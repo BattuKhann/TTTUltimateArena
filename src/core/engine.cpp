@@ -1,6 +1,6 @@
 #include "engine.hpp"
 
-inline unsigned __int128 getOccupied(const BoardState &state){
+inline __uint128_t getOccupied(const BoardState &state){
     return state.players[0] | state.players[1];
 }
 
@@ -39,7 +39,7 @@ inline bool checkFull(uint16_t board){
     return (board & 0x01FF) == 0x01FF;
 }
 
-inline unsigned __int128 getLegalMoves(const BoardState &state){
+inline __uint128_t getLegalMoves(const BoardState &state){
     __uint128_t legal = 0;
     uint16_t open = state.currBoard;
 
