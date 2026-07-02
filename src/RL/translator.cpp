@@ -1,6 +1,6 @@
 #include "translator.hpp"
 
-void writeStateVector(const BoardState& state, float* outBuffer){
+void writeStateVector(const BoardState& state, uint8_t* outBuffer){
     int currPlayer = state.currPlayer;
     __uint128_t friendly = state.players[currPlayer];
     __uint128_t enemy = state.players[1 - currPlayer];
@@ -9,9 +9,9 @@ void writeStateVector(const BoardState& state, float* outBuffer){
 
     for(int i = 0; i < 81; i++){
         int idx = i*3;
-        outBuffer[idx] = (float)((bool)(friendly & target));
-        outBuffer[idx + 1] = (float)((bool)(enemy & target));
-        outBuffer[idx + 2] = (float)((bool)(legalMoves & target));
+        outBuffer[idx] = (bool)(friendly & target);
+        outBuffer[idx + 1] = (bool)(enemy & target);
+        outBuffer[idx + 2] = (bool)(legalMoves & target);
         target <<= 1;
     }
 
