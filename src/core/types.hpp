@@ -4,9 +4,10 @@
 #include "../common/constants.hpp"
 
 struct BoardState {
-    __uint128_t players[2]; //Lowest 81 bits for whole board
-    uint16_t globalBoards[2];
-    uint16_t drawBoard;
-    uint16_t currBoard; //One-Hot, All open boards hot
-    uint16_t currPlayer;
+    __uint128_t players[2] = {0, 0}; //Lowest 81 bits for whole board
+    uint16_t globalBoards[2] = {0, 0};
+    uint16_t drawBoard = 0;
+    uint16_t currBoard = 0x1FF; //One-Hot, All open boards hot
+    uint16_t currPlayer = 0;
+    uint16_t winner = 0;
 };

@@ -1,6 +1,6 @@
 #include "translator.hpp"
 
-void writeStateVector(const BoardState& state, uint8_t* outBuffer){
+void writeStateVector(const BoardState& state, int8_t* outBuffer){
     int currPlayer = state.currPlayer;
     __uint128_t friendly = state.players[currPlayer];
     __uint128_t enemy = state.players[1 - currPlayer];

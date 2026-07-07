@@ -7,33 +7,23 @@ using namespace nb::literals;
 
 NB_MODULE(uttt_engine, m){
     nb::class_<Arena>(m, "Arena")
-        .def(nb::init<int>(), "size"_a)
-        .def("step", &Arena::step)
+        .def("__init__", [](Arena* footprint, int size, 
+                            nb::ndarray<int8_t, nb::ndim<2>> states0, 
+                            nb::ndarray<int8_t, nb::ndim<2>> states1,
+                            nb::ndarray<int8_t, nb::ndim<1>> actions0, 
+                            nb::ndarray<int8_t, nb::ndim<1>> actions1,
+                            nb::ndarray<int8_t, nb::ndim<1>> rewards0, 
+                            nb::ndarray<int8_t, nb::ndim<1>> rewards1) {
+            
+            int8_t* s0 = (int8_t*)states0.data();
+            int8_t* s1 = (int8_t*)states1.data();
+            int8_t* a0 = (int8_t*)actions0.data();
+            int8_t* a1 = (int8_t*)actions1.data();
+            int8_t* r0 = (int8_t*)rewards0.data();
+            int8_t* r1 = (int8_t*)rewards1.data();
 
-        .def("get_input_buffer", [](Arena& self, int bufferIdx) {
-            size_t shape[2] = { static_cast<size_t>(self.get_buffer_size()), 270 };
-            return nb::ndarray<nb::numpy, uint8_t>(
-                self.get_in_ptr(bufferIdx),
-                2,       
-            shape
-            );
-        }, "buffer_idx"_a)
-
-        .def("get_output_buffer", [](Arena& self, int bufferIdx) {
-            size_t shape[1] = { static_cast<size_t>(self.get_buffer_size()) };
-            return nb::ndarray<nb::numpy, uint8_t>(
-                self.get_out_ptr(bufferIdx),
-                1,
-                shape
-            );
-        }, "buffer_idx"_a)
-
-        .def("get_reward_buffer", [](Arena& self, int bufferIdx) {
-            size_t shape[1] = { static_cast<size_t>(self.get_buffer_size()) };
-            return nb::ndarray<nb::numpy, float>(
-                self.get_reward_ptr(bufferIdx),
-                1,
-                shape
-            );
-        }, "buffer_idx"_a);
+            new (footprint) Arena(size, s0, s1, a0, a1, r0, r1);
+        })
+        .def("reset", &Arena::reset)
+        .def("step", &Arena::step, nb::call_guard<nb::gil_scoped_release>());
 }

@@ -1,7 +1,8 @@
 #include "engine.hpp"
 
-float move(BoardState &state, int square){
-    float reward;
+int8_t move(BoardState &state, int square){
+    if(state.winner) return 0;
+    uint8_t reward;
     int currPlayer = state.currPlayer;
     __uint128_t &currMask = state.players[currPlayer];
     __uint128_t targetMask = (__uint128_t)1 << square;

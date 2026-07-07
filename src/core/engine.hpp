@@ -58,4 +58,4 @@ inline __uint128_t getLegalMoves(const BoardState &state){
     return legal & ~getOccupied(state);
 }
 
-float move(BoardState &state, int square); //Sets currboard to 0xFF for open play, returns simple reward
+int8_t move(BoardState &state, int square); //Sets currboard to 0xFF for open play, returns simple reward
