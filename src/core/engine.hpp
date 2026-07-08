@@ -11,7 +11,7 @@ inline uint16_t getGlobalBoard(const BoardState &state, int player){
 }
 
 inline uint16_t getGlobalBoard(const BoardState &state){
-    return getGlobalBoard(state, 0) | getGlobalBoard(state, 1);
+    return getGlobalBoard(state, 0) | getGlobalBoard(state, 1) | state.drawBoard;
 }
 
 inline void setGlobalBoard(BoardState &state, int player, int board){
@@ -24,6 +24,10 @@ inline bool isFull(const BoardState &state, int board){
 
 inline void setFull(BoardState &state, int board){
     state.drawBoard |= ((uint16_t)1 << board);
+}
+
+inline bool isOpen(BoardState &state, int board){
+    return getGlobalBoard(state) & ((uint16_t)1 << board);
 }
 
 inline bool checkWin(uint16_t board){
@@ -58,4 +62,4 @@ inline __uint128_t getLegalMoves(const BoardState &state){
     return legal & ~getOccupied(state);
 }
 
-int8_t move(BoardState &state, int square); //Sets currboard to 0xFF for open play, returns simple reward
+int8_t move(BoardState &state, int square);
