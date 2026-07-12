@@ -9,5 +9,4 @@ struct BoardState {
     uint16_t drawBoard = 0;
     uint16_t currBoard = 0x1FF; //One-Hot, All open boards hot
     uint16_t currPlayer = 0;
-    uint16_t winner = 0;
 };
